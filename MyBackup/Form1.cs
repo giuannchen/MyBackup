@@ -15,21 +15,12 @@ namespace MyBackup
         public Form1()
         {
             InitializeComponent();
-            ConfigManager configManager = new ConfigManager();
-            configManager.ProcessConfigs();
-            for (int i = 0; i < configManager.Count; i++)
-            {
-                Config config = configManager[i];
-                listBox1.Items.Add(config.Ext);
-            }
 
-            ScheduleManager scheduleManager = new ScheduleManager();
-            scheduleManager.ProcessSchedules();
-            for (int i = 0; i < scheduleManager.Count - 1; i++)
-            {
-                Schedule schedule = scheduleManager[i];
-                listBox1.Items.Add(schedule.Ext);
-            }
+            MyBackupService myBackupService = new MyBackupService();
+            myBackupService.ProcessJsonConfigs();
+            myBackupService.DoBackup();
+            listBox1.Items.Add("顯示JSON檔內容筆數");
+            listBox1.Items.Add(myBackupService.DoPrintCount());
         }
     }
 }

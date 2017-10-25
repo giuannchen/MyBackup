@@ -8,24 +8,17 @@ namespace MyBackup
     /// <summary>
     /// 使用者
     /// </summary>
-    public class ScheduleManager
+    public class ScheduleManager : JsonManager
     {
+        /// <summary>
+        /// 排程檔名稱
+        /// </summary>
+        private const string FilePath = @"schedule.json";
+
         /// <summary>
         /// 存放多筆 Schedule 物件
         /// </summary>
         private List<Schedule> schedules = new List<Schedule>();
-
-        /// <summary>
-        /// 提供 Schedule的筆數
-        /// </summary>
-        /// <returns> Schedule筆數 </returns>
-        public Int32 Count
-        {
-            get
-            {
-                return schedules.Count;
-            }
-        }
 
         ///  <summary>
         ///  取得指定的Schedule物件
@@ -41,26 +34,30 @@ namespace MyBackup
         }
 
         /// <summary>
+        /// 提供 Schedule的筆數
+        /// </summary>
+        /// <returns> Schedule筆數 </returns>
+        public override Int32 GetCount()
+        {
+            return schedules.Count;
+        }
+
+        /// <summary>
         /// 將 schedule.json 轉成 List
         /// </summary>
-        public void ProcessSchedules()
+        public override void ProcessJsonConfig()
         {
-            //設定檔名稱
-            string scheduleFileName = "schedule.json";
-            if (File.Exists(scheduleFileName) != false)
+            JObject scheduleData = this.GetJsonObject(FilePath);
+            JArray scheduleDataArray = (JArray)scheduleData["schedules"];
+            foreach (var schedule in scheduleDataArray.Children())
             {
-                JObject scheduleData = JObject.Parse(File.ReadAllText(scheduleFileName));
-                JArray configDataArray = (JArray)scheduleData["schedules"];
-                foreach (var config in configDataArray.Children())
-                {
-                    schedules.Add(
-                                 new Schedule(
-                                              (string)config["ext"],
-                                              (string)config["time"],
-                                              (string)config["interval"]
-                                            )
-                                  );
-                }
+                schedules.Add(
+                             new Schedule(
+                                          (string)schedule["ext"],
+                                          (string)schedule["time"],
+                                          (string)schedule["interval"]
+                                        )
+                              );
             }
         }
     }
