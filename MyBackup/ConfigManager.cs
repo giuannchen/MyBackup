@@ -20,25 +20,26 @@ namespace MyBackup
         /// </summary>
         private List<Config> configs = new List<Config>();
 
-        ///  <summary>
-        ///  取得指定的Config物件
-        ///   </summary>
-        ///   <param name="index">索引</param>
-        ///   <returns> Config物件 </returns>
+        /// <summary>
+        /// 取得指定的Config物件
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <returns> Config物件</returns>
         public Config this[int index]
         {
             get
             {
-                return configs[index];
+                return this.configs[index];
             }
         }
 
         /// <summary>
         /// 提供 Config的筆數
         /// </summary>
-        public override Int32 GetCount()
+        /// <returns> Config筆數</returns>
+        public override int GetCount()
         {
-            return configs.Count;
+            return this.configs.Count;
         }
 
         /// <summary>
@@ -50,19 +51,17 @@ namespace MyBackup
             JArray configDataArray = (JArray)configData["configs"];
             foreach (var config in configDataArray.Children())
             {
-                configs.Add(
+                this.configs.Add(
                              new Config(
                                           (string)config["ext"],
                                           (string)config["location"],
                                           (bool)config["subDirectory"],
                                           (string)config["unit"],
                                           (bool)config["remove"],
-                                          (string)config["handler"],
+                                          config["handlers"].ToObject<string[]>(),
                                           (string)config["destination"],
                                           (string)config["dir"],
-                                          (string)config["connectionString"]
-                                        )
-                              );
+                                          (string)config["connectionString"]));
             }
         }
     }

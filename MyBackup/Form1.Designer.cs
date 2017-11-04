@@ -1,5 +1,8 @@
 ﻿namespace MyBackup
 {
+    /// <summary>
+    /// 設計
+    /// </summary>
     partial class Form1
     {
         /// <summary>

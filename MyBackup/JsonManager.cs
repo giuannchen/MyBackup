@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 namespace MyBackup
 {
@@ -14,7 +12,8 @@ namespace MyBackup
         /// <summary>
         /// 將擷取筆數抽象化
         /// </summary>
-        public abstract Int32 GetCount();
+        /// <returns>筆數</returns>
+        public abstract int GetCount();
 
         /// <summary>
         /// 將讀取Json抽象化
@@ -24,6 +23,8 @@ namespace MyBackup
         /// <summary>
         /// 抽出共用的部分
         /// </summary>
+        /// <param name="Path">檔案路徑</param>
+        /// <returns>Jason物件</returns>
         protected JObject GetJsonObject(string Path)
         {
             string configValue = File.ReadAllText(Path);

@@ -7,27 +7,71 @@ namespace MyBackup
     /// </summary>
     public class Config
     {
+        /// <summary>
+        /// 連線字串
+        /// </summary>
         private string connectionString;
+
+        /// <summary>
+        /// 目的地
+        /// </summary>
         private string destination;
+
+        /// <summary>
+        /// 目錄
+        /// </summary>
         private string dir;
+
+        /// <summary>
+        /// 副檔名
+        /// </summary>
         private string ext;
-        private string handler;
+
+        /// <summary>
+        /// 處理器
+        /// </summary>
+        private string[] handlers;
+
+        /// <summary>
+        /// 位置
+        /// </summary>
         private string location;
+
+        /// <summary>
+        /// 是否搬移
+        /// </summary>
         private bool remove;
+
+        /// <summary>
+        /// 子目錄
+        /// </summary>
         private bool subDirectory;
+
+        /// <summary>
+        /// 單元
+        /// </summary>
         private string unit;
 
         /// <summary>
         /// Instance constructor
         /// </summary>
-        public Config(string ext, string location, bool subDirectory, string unit, bool remove, string handler, string destination, string dir, string connectionString)
+        /// <param name="ext">副檔名</param>
+        /// <param name="location">位置</param>
+        /// <param name="subDirectory">子目錄</param>
+        /// <param name="unit">單元</param>
+        /// <param name="remove">是否移除</param>
+        /// <param name="handlers">處理器</param>
+        /// <param name="destination">目的地</param>
+        /// <param name="dir">目錄</param>
+        /// <param name="connectionString">連線字串</param>
+        public Config(string ext, string location, bool subDirectory, string unit, bool remove, string[] handlers, string destination, string dir, string connectionString)
         {
             this.ext = ext;
             this.location = location;
             this.subDirectory = subDirectory;
             this.unit = unit;
             this.remove = remove;
-            this.handler = handler;
+            this.handlers = handlers;
             this.destination = destination;
             this.dir = dir;
             this.connectionString = connectionString;
@@ -40,7 +84,7 @@ namespace MyBackup
         {
             get
             {
-                return connectionString;
+                return this.connectionString;
             }
         }
 
@@ -51,7 +95,7 @@ namespace MyBackup
         {
             get
             {
-                return destination;
+                return this.destination;
             }
         }
 
@@ -62,7 +106,7 @@ namespace MyBackup
         {
             get
             {
-                return dir;
+                return this.dir;
             }
         }
 
@@ -73,19 +117,16 @@ namespace MyBackup
         {
             get
             {
-                return ext;
+                return this.ext;
             }
         }
 
         /// <summary>
         /// zip  : 壓縮；encode : 加密
         /// </summary>
-        public string Handler
+        public string[] Handlers
         {
-            get
-            {
-                return handler;
-            }
+            get { return this.handlers; }
         }
 
         /// <summary>
@@ -95,7 +136,7 @@ namespace MyBackup
         {
             get
             {
-                return location;
+                return this.location;
             }
         }
 
@@ -106,7 +147,7 @@ namespace MyBackup
         {
             get
             {
-                return remove;
+                return this.remove;
             }
         }
 
@@ -117,7 +158,7 @@ namespace MyBackup
         {
             get
             {
-                return subDirectory;
+                return this.subDirectory;
             }
         }
 
@@ -128,7 +169,7 @@ namespace MyBackup
         {
             get
             {
-                return unit;
+                return this.unit;
             }
         }
     }

@@ -7,13 +7,27 @@ namespace MyBackup
     /// </summary>
     public class Schedule
     {
+        /// <summary>
+        /// 副檔名
+        /// </summary>
         private string ext;
+
+        /// <summary>
+        /// 間隔
+        /// </summary>
         private string interval;
+
+        /// <summary>
+        /// 時間
+        /// </summary>
         private string time;
 
         /// <summary>
         /// Instance constructor
         /// </summary>
+        /// <param name="ext">副檔名</param>
+        /// <param name="time">間格</param>
+        /// <param name="interval">時間</param>
         public Schedule(string ext, string time, string interval)
         {
             this.ext = ext;
@@ -28,7 +42,7 @@ namespace MyBackup
         {
             get
             {
-                return ext;
+                return this.ext;
             }
         }
 
@@ -39,7 +53,7 @@ namespace MyBackup
         {
             get
             {
-                return interval;
+                return this.interval;
             }
         }
 
@@ -50,7 +64,7 @@ namespace MyBackup
         {
             get
             {
-                return time;
+                return this.time;
             }
         }
     }

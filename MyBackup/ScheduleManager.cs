@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json.Linq;
 
 namespace MyBackup
@@ -20,16 +19,16 @@ namespace MyBackup
         /// </summary>
         private List<Schedule> schedules = new List<Schedule>();
 
-        ///  <summary>
-        ///  取得指定的Schedule物件
-        ///   </summary>
-        ///   <param name="index">索引</param>
-        ///   <returns> Schedule物件 </returns>
+        /// <summary>
+        /// 取得指定的Schedule物件
+        /// </summary>
+        /// <param name="index">索引</param>
+        /// <returns>Schedule物件</returns>
         public Schedule this[int index]
         {
             get
             {
-                return schedules[index];
+                return this.schedules[index];
             }
         }
 
@@ -37,9 +36,9 @@ namespace MyBackup
         /// 提供 Schedule的筆數
         /// </summary>
         /// <returns> Schedule筆數 </returns>
-        public override Int32 GetCount()
+        public override int GetCount()
         {
-            return schedules.Count;
+            return this.schedules.Count;
         }
 
         /// <summary>
@@ -51,13 +50,11 @@ namespace MyBackup
             JArray scheduleDataArray = (JArray)scheduleData["schedules"];
             foreach (var schedule in scheduleDataArray.Children())
             {
-                schedules.Add(
+                this.schedules.Add(
                              new Schedule(
                                           (string)schedule["ext"],
                                           (string)schedule["time"],
-                                          (string)schedule["interval"]
-                                        )
-                              );
+                                          (string)schedule["interval"]));
             }
         }
     }

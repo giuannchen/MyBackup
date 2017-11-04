@@ -29,7 +29,11 @@ namespace MyBackup
         /// </summary>
         public void DoBackup()
         {
-            //
+            List<Candidate> candidates = this.FindFiles();
+            foreach (Candidate candidate in candidates)
+            {
+                this.BroadcastToHandlers(candidate);
+            }
         }
 
         /// <summary>
@@ -43,16 +47,60 @@ namespace MyBackup
             {
                 SumCountString += this.managers[i].GetCount() + Environment.NewLine;
             }
+
             return SumCountString;
         }
 
         /// <summary>
-        ///讀取設定檔
+        /// 讀取設定檔
         /// </summary>
         public void ProcessJsonConfigs()
         {
             for (int i = 0; i < this.managers.Count; i++)
+            {
                 this.managers[i].ProcessJsonConfig();
+            }
+        }
+
+        /// <summary>
+        /// 並將處理完的資料，交給下一個 handler
+        /// </summary>
+        /// <param name="candidate">處理前資料</param>
+        private void BroadcastToHandlers(Candidate candidate)
+        {
+            List<IHandler> handlers = this.FindHandlers(candidate);
+            byte[] target = null;
+            foreach (IHandler handler in handlers)
+            {
+                target = handler.Perform(candidate, target);
+            }
+        }
+
+        /// <summary>
+        /// Homework 4
+        /// </summary>
+        /// <returns>檔案清單</returns>
+        private List<Candidate> FindFiles()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 尋找檔案處理器
+        /// </summary>
+        /// <param name="candidate">檔案資訊</param>
+        /// <returns>檔案處理器集合</returns>
+        private List<IHandler> FindHandlers(Candidate candidate)
+        {
+            List<IHandler> handlers = new List<IHandler>();
+            handlers.Add(HandlerFactory.Create("file"));
+            foreach (string handler in candidate.Config.Handlers)
+            {
+                handlers.Add(HandlerFactory.Create(handler));
+            }
+
+            handlers.Add(HandlerFactory.Create(candidate.Config.Destination));
+            return handlers;
         }
     }
 }
