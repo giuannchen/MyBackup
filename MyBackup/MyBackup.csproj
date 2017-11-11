@@ -48,11 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractFinder.cs" />
     <Compile Include="AbstractHandler.cs" />
     <Compile Include="Candidate.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DirectoryHandler.cs" />
     <Compile Include="EncodeHandler.cs" />
+    <Compile Include="IFileFinder.cs" />
+    <Compile Include="FileFinderFactory.cs" />
     <Compile Include="FileHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -63,6 +66,7 @@
     <Compile Include="IHandler.cs" />
     <Compile Include="HandlerFactory.cs" />
     <Compile Include="JsonManager.cs" />
+    <Compile Include="LocalFileFinder.cs" />
     <Compile Include="MyBackupService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

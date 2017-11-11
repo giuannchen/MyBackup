@@ -10,6 +10,8 @@ namespace MyBackup
     /// </summary>
     public class MyBackupService
     {
+        private ConfigManager configManager;
+
         /// <summary>
         /// 存放多筆 JsonManager 物件
         /// </summary>
@@ -29,10 +31,13 @@ namespace MyBackup
         /// </summary>
         public void DoBackup()
         {
-            List<Candidate> candidates = this.FindFiles();
-            foreach (Candidate candidate in candidates)
+            configManager = new ConfigManager();
+            for (int i = 0; i < this.configManager.GetCount(); i++)
             {
-                this.BroadcastToHandlers(candidate);
+                IFileFinder fileFinder = FileFinderFactory.Create("file", this.configManager[i]);
+
+                foreach (Candidate candidate in fileFinder)
+                    this.BroadcastToHandlers(candidate);
             }
         }
 
