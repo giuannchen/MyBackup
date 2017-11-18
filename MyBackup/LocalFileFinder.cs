@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MyBackupCandidate;
+using System.Collections.Generic;
 using System.IO;
 
 namespace MyBackup
@@ -22,10 +23,14 @@ namespace MyBackup
         public LocalFileFinder(Config config) : base(config)
         {
             if (config.SubDirectory == true)
+            {
                 this.files = this.GetSubDirectoryFiles(config);
+            }
             else
+            {
                 this.files =
                 Directory.GetFiles(config.Location, "*." + config.Ext);
+            }
         }
 
         /// <summary>
@@ -35,19 +40,13 @@ namespace MyBackup
         /// <returns>檔案資訊</returns>
         protected override Candidate CreateCandidate(string fileName)
         {
-            FileInfo fileInfo = new FileInfo(fileName);
-            string[] handlers = { "zip", "encode" };
-            Config config = new Config(
-                                          fileInfo.Extension,
-                                          fileInfo.DirectoryName,
-                                          HasSubfoldersDavidDax(fileInfo.DirectoryName),
-                                          "file",
-                                          false,
-                                          handlers,
-                                          "directory",
-                                          "c:\\MyArchieves",
-                                          "");
-            Candidate candidate = new Candidate(config);
+            FileInfo fileInfo;
+            Candidate candidate = null;
+            if (File.Exists(fileName))
+            {
+                fileInfo = new FileInfo(fileName);
+                candidate = CandidateFactory.Create(this.config, fileName, fileInfo.CreationTime, fileInfo.Length);
+            }
             return candidate;
         }
 

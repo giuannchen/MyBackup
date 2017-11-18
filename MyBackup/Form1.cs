@@ -15,7 +15,8 @@ namespace MyBackup
             this.InitializeComponent();
             MyBackupService myBackupService = new MyBackupService();
             myBackupService.ProcessJsonConfigs();
-            myBackupService.DoBackup();
+            myBackupService.SimpleBackup();
+            myBackupService.ScheduledBackup();
             listBox1.Items.Add("顯示JSON檔內容筆數");
             listBox1.Items.Add(myBackupService.DoPrintCount());
         }

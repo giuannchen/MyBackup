@@ -50,7 +50,9 @@
   <ItemGroup>
     <Compile Include="AbstractFinder.cs" />
     <Compile Include="AbstractHandler.cs" />
+    <Compile Include="AbstractTask.cs" />
     <Compile Include="Candidate.cs" />
+    <Compile Include="CandidateFactory.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DirectoryHandler.cs" />
     <Compile Include="EncodeHandler.cs" />
@@ -72,7 +74,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigManager.cs" />
     <Compile Include="Schedule.cs" />
+    <Compile Include="ScheduledTask.cs" />
     <Compile Include="ScheduleManager.cs" />
+    <Compile Include="ITask.cs" />
+    <Compile Include="SimpleTask.cs" />
+    <Compile Include="TaskDispatcher.cs" />
+    <Compile Include="TaskFactory.cs" />
     <Compile Include="ZipHandler.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -86,6 +93,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

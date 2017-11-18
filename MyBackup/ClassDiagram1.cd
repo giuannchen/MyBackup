@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MyBackup.SimpleleTask">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimpleTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyBackup.ScheduledTask">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ScheduledTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyBackup.AbstractTask">
+    <Position X="5.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAEAAAAAAAAAAAQAAAAIAAAA=</HashCode>
+      <FileName>AbstractTask.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MyBackup.TaskFactory">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>TaskFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ITask" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyBackup.TaskDispatcher">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAARAAAA=</HashCode>
+      <FileName>TaskDispatcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyBackup.MyBackupService">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAICAAAAAiAAACAQAgAAA=</HashCode>
+      <FileName>MyBackupService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TaskDispatcher" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyBackupCandidate.CandidateFactory">
+    <Position X="0.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>CandidateFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Candidate" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MyBackupCandidate.Candidate">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACACAAAgAAgAAAAIAAAAQAAAgEAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Candidate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MyBackup.ITask">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ITask.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="微軟正黑體" Size="9" />
+</ClassDiagram>

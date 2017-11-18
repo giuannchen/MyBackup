@@ -1,6 +1,7 @@
-﻿using System;
+﻿using MyBackup;
+using System;
 
-namespace MyBackup
+namespace MyBackupCandidate
 {
     /// <summary>
     /// 檔案資訊
@@ -10,35 +11,43 @@ namespace MyBackup
         /// <summary>
         /// 檔案資訊
         /// </summary>
-        private Config config;
+        private readonly Config config;
 
         /// <summary>
         /// 檔案的日期與時間
         /// </summary>
-        private string fileDateTime;
+        private readonly DateTime fileDateTime;
 
         /// <summary>
         /// 檔案名稱
         /// </summary>
-        private string name;
+        private readonly string name;
 
         /// <summary>
         /// 檔案程序名稱
         /// </summary>
-        private string processName;
+        private readonly string processName;
 
         /// <summary>
         /// 檔案大小
         /// </summary>
-        private string size;
+        private readonly long size;
+
+        internal Candidate()
+        {
+            //
+        }
 
         /// <summary>
         /// 建立檔案資訊
         /// </summary>
         /// <param name="config">設定檔資訊</param>
-        public Candidate(Config config)
+        internal Candidate(Config config, string name, DateTime fileDateTime, long size)
         {
             this.config = config;
+            this.name = name;
+            this.fileDateTime = fileDateTime;
+            this.size = size;
         }
 
         /// <summary>
@@ -52,7 +61,7 @@ namespace MyBackup
         /// <summary>
         /// 取得檔案建立日期與時間
         /// </summary>
-        public string FileDateTime
+        public DateTime FileDateTime
         {
             get
             {
@@ -85,7 +94,7 @@ namespace MyBackup
         /// <summary>
         /// 取得檔案大小
         /// </summary>
-        public string Size
+        public long Size
         {
             get
             {

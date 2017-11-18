@@ -10,12 +10,12 @@ namespace MyBackup
     /// </summary>
     public class MyBackupService
     {
-        private ConfigManager configManager;
-
         /// <summary>
         /// 存放多筆 JsonManager 物件
         /// </summary>
         private List<JsonManager> managers = new List<JsonManager>();
+
+        private TaskDispatcher taskDispatcher;
 
         /// <summary>
         /// 初始化加入Manager
@@ -24,20 +24,15 @@ namespace MyBackup
         {
             this.managers.Add(new ConfigManager());
             this.managers.Add(new ScheduleManager());
+            this.taskDispatcher = new TaskDispatcher();
+            this.Init();
         }
 
-        /// <summary>
-        /// 執行備份
-        /// </summary>
-        public void DoBackup()
+        public TaskDispatcher TaskDispatcher
         {
-            configManager = new ConfigManager();
-            for (int i = 0; i < this.configManager.GetCount(); i++)
+            get => default(TaskDispatcher);
+            set
             {
-                IFileFinder fileFinder = FileFinderFactory.Create("file", this.configManager[i]);
-
-                foreach (Candidate candidate in fileFinder)
-                    this.BroadcastToHandlers(candidate);
             }
         }
 
@@ -68,44 +63,27 @@ namespace MyBackup
         }
 
         /// <summary>
-        /// 並將處理完的資料，交給下一個 handler
+        /// 排程備份
         /// </summary>
-        /// <param name="candidate">處理前資料</param>
-        private void BroadcastToHandlers(Candidate candidate)
+        public void ScheduledBackup()
         {
-            List<IHandler> handlers = this.FindHandlers(candidate);
-            byte[] target = null;
-            foreach (IHandler handler in handlers)
-            {
-                target = handler.Perform(candidate, target);
-            }
+            this.taskDispatcher.ScheduledTask(managers);
         }
 
         /// <summary>
-        /// Homework 4
+        /// 簡單備份
         /// </summary>
-        /// <returns>檔案清單</returns>
-        private List<Candidate> FindFiles()
+        public void SimpleBackup()
         {
-            throw new NotImplementedException();
+            this.taskDispatcher.SimpleTask(managers);
         }
 
         /// <summary>
-        /// 尋找檔案處理器
+        /// 初始化
         /// </summary>
-        /// <param name="candidate">檔案資訊</param>
-        /// <returns>檔案處理器集合</returns>
-        private List<IHandler> FindHandlers(Candidate candidate)
+        private void Init()
         {
-            List<IHandler> handlers = new List<IHandler>();
-            handlers.Add(HandlerFactory.Create("file"));
-            foreach (string handler in candidate.Config.Handlers)
-            {
-                handlers.Add(HandlerFactory.Create(handler));
-            }
-
-            handlers.Add(HandlerFactory.Create(candidate.Config.Destination));
-            return handlers;
+            this.ProcessJsonConfigs();
         }
     }
 }
