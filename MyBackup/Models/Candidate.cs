@@ -33,6 +33,9 @@ namespace MyBackupCandidate
         /// </summary>
         private readonly long size;
 
+        /// <summary>
+        /// 檔案
+        /// </summary>
         internal Candidate()
         {
             //
@@ -42,6 +45,9 @@ namespace MyBackupCandidate
         /// 建立檔案資訊
         /// </summary>
         /// <param name="config">設定檔資訊</param>
+        /// <param name="name">檔名</param>
+        /// <param name="fileDateTime">日期</param>
+        /// <param name="size">大小</param>
         internal Candidate(Config config, string name, DateTime fileDateTime, long size)
         {
             this.config = config;

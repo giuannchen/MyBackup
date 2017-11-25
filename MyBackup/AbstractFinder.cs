@@ -49,7 +49,7 @@ namespace MyBackup
         /// <summary>
         /// IEnumerable
         /// </summary>
-        /// <returns></returns>
+        /// <returns>IEnumerator</returns>
         public IEnumerator GetEnumerator()
         {
             return (IEnumerator)this;
